@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Order List</title>
+ <style>
+       #jb-title {
+        font-size:18px;
+		font-weight:500;
+      }
+      #jb-header {
+        padding:5px;
+		background-color:#E1E1C4;
+		font-weight:bold
+      }
+      #jb-header-w90 {
+        padding:5px;
+		background-color:#E1E1C4;
+		font-weight:bold;
+		width:90px;
+      }
+      #jb-header-w120 {
+        padding:5px;
+		background-color:#E1E1C4;
+		font-weight:bold
+		width:120px;
+      }		  
+      #jb-line-out {
+        height:3px
+      }
+      #jb-line-in {
+        background-color:#000;
+		height:1px
+      }
+      #jb-second-column {
+        background-color:#EBEBEB;
+      }
+    </style>
+</head>
+
+<body>
+<table width="800" border="0">
+  <tr>
+    <td colspan="4" align="left" id="jb-title">Order Detail List (total : 12)</td>
+  </tr>
+  <tr>
+    <td>ORDER DATE (YYYYmmdd) :</td>
+    <td><input type="text" /><input name="search" type="submit" id="search" value="search" /></td>
+    <td>&nbsp;</td>
+    <td><input type="text" /><input name="genetate" type="submit" id="genetate" value="Genetate" /></td>
+  </tr>
+</table><br />
+<table  border="0" cellpadding="0" cellspacing="1" >
+  <tr align="center">
+    <td id="jb-header">Chk</td>
+    <td id="jb-header">OrderDate</td>
+    <td id="jb-header">Brand</td>
+    <td id="jb-header">Vpid</td>
+    <td id="jb-header">VOrderColor</td>
+    <td id="jb-header">Vsize</td>
+    <td id="jb-header-w90">VProdNm</td>
+    <td id="jb-header">Ship</td>
+    <td id="jb-header-w120">OrderId(S)</td>
+    <td id="jb-header">OrderSeq(C)</td>
+    <td id="jb-header">BillName</td>
+    <td id="jb-header">Phone</td>
+    <td id="jb-header">Address</td>
+  </tr>
+  <tr align="center">
+    <td rowspan="2"><input type="checkbox" name="sel" id="sel" /></td>
+    <td>2017-08-04</td>
+    <td>BLANK</td>
+    <td>61SK04-WH</td>
+    <td>WHITE</td>
+    <td>FREE</td>
+    <td>&nbsp;</td>
+    <td>USPS-F</td>
+    <td>ABCD1234</td>
+    <td align="center">64</td>
+    <td>NA,YEOJIN</td>
+    <td>105191</td>
+    <td>AAAAA</td>
+  </tr>
+  <tr align="center" id="jb-second-column">
+    <td style="font-weight:bold">Dome Carrier</td>
+    <td><label>
+      <input type="text" name="carrier" id="carrier" />
+    </label></td>
+    <td style="font-weight:bold">Dome Track #</td>
+    <td><label>
+      <input type="text" name="Tracknum" id="Tracknum" />
+    </label></td>
+    <td style="font-weight:bold">Put Together</td>
+    <td> <input type="radio" name="vpn" id="radio" value="1" />
+    Yes<input type="radio" name="vpn" id="radio" value="1" />
+    No</td>
+    <td style="font-weight:bold">Is Box</td>
+    <td>
+      <input type="radio" name="box" id="POLY" value="POLY" />POLY
+      <input type="radio" name="box" id="POLY" value="BOX" />BOX
+    </td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+    <tr><td colspan="13" id="jb-line-in"></td></tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+  <tr align="center">
+    <td rowspan="2"><input type="checkbox" name="sel" id="sel" /></td>
+    <td>2017-08-04</td>
+    <td>BLANK</td>
+    <td>61SK04-WH</td>
+    <td>WHITE</td>
+    <td>FREE</td>
+    <td>&nbsp;</td>
+    <td>USPS-F</td>
+    <td>ABCD1234</td>
+    <td align="center">64</td>
+    <td>NA,YEOJIN</td>
+    <td>105191</td>
+    <td>AAAAA</td>
+  </tr>
+  <tr align="center" id="jb-second-column">
+    <td style="font-weight:bold">Dome Carrier</td>
+    <td><label>
+      <input type="text" name="carrier" id="carrier" />
+    </label></td>
+    <td style="font-weight:bold">Dome Track #</td>
+    <td><label>
+      <input type="text" name="Tracknum" id="Tracknum" />
+    </label></td>
+    <td style="font-weight:bold">Put Together</td>
+    <td> <input type="radio" name="vpn" id="radio" value="1" />
+    Yes<input type="radio" name="vpn" id="radio" value="1" />
+    No</td>
+    <td style="font-weight:bold">Is Box</td>
+    <td>
+      <input type="radio" name="box" id="POLY" value="POLY" />POLY
+      <input type="radio" name="box" id="POLY" value="BOX" />BOX
+    </td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+    <tr><td colspan="13" id="jb-line-in"></td></tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+
+   <tr align="center">
+    <td rowspan="2"><input type="checkbox" name="sel" id="sel" /></td>
+    <td>2017-08-04</td>
+    <td>BLANK</td>
+    <td>61SK04-WH</td>
+    <td>WHITE</td>
+    <td>FREE</td>
+    <td>&nbsp;</td>
+    <td>USPS-F</td>
+    <td>ABCD1234</td>
+    <td align="center">64</td>
+    <td>NA,YEOJIN</td>
+    <td>105191</td>
+    <td>AAAAA</td>
+  </tr>
+  <tr align="center" id="jb-second-column">
+    <td style="font-weight:bold">Dome Carrier</td>
+    <td><label>
+      <input type="text" name="carrier" id="carrier" />
+    </label></td>
+    <td style="font-weight:bold">Dome Track #</td>
+    <td><label>
+      <input type="text" name="Tracknum" id="Tracknum" />
+    </label></td>
+    <td style="font-weight:bold">Put Together</td>
+    <td> <input type="radio" name="vpn" id="radio" value="1" />
+    Yes<input type="radio" name="vpn" id="radio" value="1" />
+    No</td>
+    <td style="font-weight:bold">Is Box</td>
+    <td>
+      <input type="radio" name="box" id="POLY" value="POLY" />POLY
+      <input type="radio" name="box" id="POLY" value="BOX" />BOX
+    </td>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+    <tr><td colspan="13" id="jb-line-in"></td></tr>
+    <tr><td colspan="13" id="jb-line-out"></td></tr>
+    <tr><td colspan="13" align="center"><input name="submit" type="submit" id="submit"  /></td></tr>
+</table>
+</body>
+</html>
