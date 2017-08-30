@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import service.UserService;
 import service.UserServiceImpl;
 
@@ -49,29 +51,21 @@ public class UserServlet extends HttpServlet {
 			}
 			doProcess(response, result);
 		}else if(command.equals("signin")) {
-			String id = request.getParameter("id");
-			String pwd = request.getParameter("pwd");
-			String name = request.getParameter("name");
-			String[]  hobbies = request.getParameterValues("hobby");
-			String hobby="";
-			for(String h : hobbies) {
-				hobby += h+",";
-			}
-			hobby = hobby.substring(0, hobby.length()-1);
-			Map<String, String> hm = new HashMap<String, String>();
-			hm.put("id", id);
-			hm.put("pwd", pwd);
-			hm.put("name", name);
-			hm.put("hobby", hobby);
+			String str = request.getParameter("param");
+			Gson g = new Gson();
+			HashMap<String, String> hm = g.fromJson(str, HashMap.class);
+			
 			String result = "회원가입에 실패하셨습니다.";
 			int rCnt = us.insertUser(hm);
 			if(rCnt==1) {
-				result ="<script>";
-				result +="alert('회원가입에 성공하셨습니다. 로그인해주시기 바랍니다.');";
-				result +="location.href='/login.jsp';";
-				result +="</script>";
+				result ="회원가입에 성공하셨습니다.";
+				result += "다시 로그인해주시기 바랍니다.";
 			}
-			doProcess(response, result);
+			HashMap rHm = new HashMap();
+			rHm.put("msg", result);
+			rHm.put("url", "/login.jsp");
+			str = g.toJson(rHm);
+			doProcess(response, str);
 		}else if(command.equals("logout")) {
 			HttpSession session = request.getSession();
 			session.invalidate();
@@ -130,8 +124,8 @@ public class UserServlet extends HttpServlet {
 				result += "<td>" + m.get("id")+"</td>";
 				result += "<td>" + m.get("name")+"</td>";
 				result += "<td>" + m.get("hobby")+"</td>";
-				result += "<td><input type='button' value='수정'></td>";
-				result += "<td><input type='button' value='삭제'></td>";
+				result += "<td><input type='button' value='수정' data-num='" + m.get("user_no") +"'></td>";
+				result += "<td><input type='button' value='삭제' data-num='" + m.get("user_no") +"'></td>";
 				result += "</tr>";
 			}
 			result += "</table>";

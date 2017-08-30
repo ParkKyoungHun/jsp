@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertUser(Map<String, String> hm) {
-		String sql = "insert into user(id,pwd,name,hobby)";
-		sql +="values(?,?,?,?)";
+		String sql = "insert into user(id,pwd,name,hobby,admin)";
+		sql +="values(?,?,?,?,?)";
 		Connection con;
 		try {
 			DBCon db = new DBCon();
@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 			ps.setString(2, hm.get("pwd"));
 			ps.setString(3, hm.get("name"));
 			ps.setString(4, hm.get("hobby"));
+			ps.setString(5, hm.get("admin"));
 			int rCnt = ps.executeUpdate();
 			return rCnt;
 		}catch(Exception e) {
