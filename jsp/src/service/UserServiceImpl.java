@@ -130,4 +130,29 @@ public class UserServiceImpl implements UserService {
 		}
 		return userList;
 	}
+
+	@Override
+	public Map<String, String> selectUser(String userNo) {
+		Connection con;
+		try {
+			DBCon db = new DBCon();
+			con = db.getCon();
+			String sql = "select * from user where user_no=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, userNo);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Map<String, String> hm = new HashMap<String, String>();
+				hm.put("id", rs.getString("id"));
+				hm.put("user_no", rs.getString("user_no"));
+				hm.put("name", rs.getString("name"));
+				hm.put("hobby", rs.getString("hobby"));
+				hm.put("admin", rs.getString("admin"));
+				return hm;
+			}			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

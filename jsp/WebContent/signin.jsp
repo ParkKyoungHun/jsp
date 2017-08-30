@@ -4,9 +4,6 @@
 <title>회원 가입</title>
 </head>
 <script>
-function exe(){
-	
-}
 $(document).ready(function(){
 	$("input[type='button']").click(function(){
 		var params = {};
@@ -14,6 +11,7 @@ $(document).ready(function(){
 		params["pwd"] = $("#pwd").val();
 		params["name"] = $("#name").val();
 		params["admin"] = $("#admin").val();
+		alert(params.id + params.pwd);
 	    var hobby = $('input[name="hobby"]:checked').map(function(){
 	        return $(this).val();
 

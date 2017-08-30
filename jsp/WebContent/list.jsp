@@ -50,8 +50,14 @@
 					au.send();
 				}
 			}else{
-				var userNum = this.getAttribute("data-num");
-				alert(userNum);
+				var userNo = this.getAttribute("data-num");
+				if(this.getAttribute("value")=="수정"){
+					location.href="/modify.jsp?userNo=" + userNo; 	
+				}else if(this.getAttribute("value")=="삭제"){
+					var param = "?command=delete&userNo="+userNo;
+					var au = new AjaxUtil(param);
+					au.send();
+				}
 			}
 		});
 	}

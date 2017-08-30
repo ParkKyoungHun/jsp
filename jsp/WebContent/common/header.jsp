@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 String rootPaht = request.getContextPath();
+if(session.getAttribute("user")==null){
+	RequestDispatcher dis = request.getRequestDispatcher("/login.jsp");
+	dis.forward(request, response);
+}
 %>
 <script src="<%=rootPaht%>/js/jquery-3.2.1.min.js"></script>
 <script>
@@ -25,18 +29,23 @@ var AjaxUtil = function(params) {
 	var method = "post";
 	var url = "test.user";
 	var aSync = true;
+	this.xhr.callfunc = null;
 	this.xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
 				var result = decodeURIComponent(this.responseText);
 				var re = JSON.parse(result);
-				alert(re.msg);
-				location.href=re.url;
+				if(this.callfunc){
+					this.callfunc(re);
+				}else{
+					alert(re.msg);
+					location.href=re.url;
+				}
 			}
 		}
 	}
 	this.changeCallBack = function(func) {
-		this.xhr.onreadystatechange = func;
+		this.xhr.callfunc = func;
 	}
 	this.xhr.open(method, url + params, aSync);
 	this.send = function() {
