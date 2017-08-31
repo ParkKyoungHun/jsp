@@ -26,6 +26,7 @@ if(session.getAttribute("user")!=null){
 <input type="button" value="로그아웃" data-url="/logout.user">
 <input type="button" value="회원수정" data-url="/modify.jsp">
 <input type="button" value="회원탈퇴" data-url="/delete.user">
+<input type="button" value="게시판가기" data-url="/board/board_list.jsp">
 <%
 if(admin.equals("1")){
 %>

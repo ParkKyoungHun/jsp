@@ -18,7 +18,6 @@ function callback(result){
 		}
 	}
 	$("#userNo").val(result.user_no);
-	
 }
 $(document).ready(function(){
 	var param = "?command=view&userNo=<%=userNo%>";

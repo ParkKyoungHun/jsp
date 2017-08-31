@@ -14,7 +14,7 @@ if(session.getAttribute("user")==null){
 %>
 <script src="<%=rootPaht%>/js/jquery-3.2.1.min.js"></script>
 <script>
-var AjaxUtil = function(params) {
+var AjaxUtil = function(params,p_url) {
 	this.params = params;
 
 	getHttpXmlObj = function() {
@@ -27,7 +27,7 @@ var AjaxUtil = function(params) {
 	}
 	this.xhr = getHttpXmlObj();
 	var method = "post";
-	var url = "test.user";
+	var url = p_url ? p_url:"test.user";
 	var aSync = true;
 	this.xhr.callfunc = null;
 	this.xhr.onreadystatechange = function() {
@@ -53,4 +53,11 @@ var AjaxUtil = function(params) {
 		this.xhr.send(params);
 	}
 }
+$(document).ready(function(){
+	$("#btnHome").click(function(){
+		location.href="/main.jsp";
+	})
+})
 </script>
+<input type="button" id="btnHome" value="홈으로">
+
