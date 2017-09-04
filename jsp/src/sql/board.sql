@@ -1,0 +1,8 @@
+CREATE TABLE `board` (
+	`b_num` INT(11) NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(300) NOT NULL,
+	`content` TEXT NULL DEFAULT NULL,
+	`reg_date` DATE NULL DEFAULT NULL,
+	`writer` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`b_num`)
+)
