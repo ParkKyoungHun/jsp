@@ -67,11 +67,12 @@
 		var au = new AjaxUtil(param);
 		au.send();
 	})
-$(document).ready(function(){
-	$("#btnHome").click(function(){
-		location.href="/main.jsp";
+		
+	$(document).ready(function(){
+		$("#btnHome").click(function(){
+			location.href="/main.jsp";
+		})
 	})
-})
 </script>
 </head>
 <body>

@@ -5,21 +5,26 @@
 <title>Insert title here</title>
 </head>
 <script>
-function test(btnObj){
-	alert(btnObj.value);
-}
 
 var TestObj = function(){
 	this.a = 3;
 	this.b = 4;
 	var c = 10;
 	this.alertStr = function(str){
-		alert(c);
+		alert(str);
+	}
+	this.changeAlertStr = function(func){
+		this.alertStr = func;
 	}
 }
 
-var to = new TestObj();
-to.alertStr();
+var test = {};
+test["key1"] = "value1";
+test["key2"] = "value2";
+
+test = JSON.stringify(test);
+test = JSON.parse(test);
+alert(test.key1);
 </script>
 <body>
 <input type="text" name="id" id="id" value="테스트"><br>

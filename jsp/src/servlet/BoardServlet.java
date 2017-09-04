@@ -42,6 +42,7 @@ public class BoardServlet extends HttpServlet {
 			Map<String, Object> rHm = new HashMap<String, Object>();
 			rHm.put("list", boardList);
 			String result = g.toJson(rHm);
+			System.out.println(result);
 			doProcess(response, result);
 		}
 	}
