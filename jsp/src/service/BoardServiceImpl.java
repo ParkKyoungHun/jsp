@@ -19,7 +19,8 @@ public class BoardServiceImpl implements BoardService{
 		try {
 			DBCon db = new DBCon();
 			con = db.getCon();
-			String sql = "select * from board where 1=1";
+			String sql = "select b.*, u.name from user as u, board as b" + 
+					" where u.user_no = b.writer";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
@@ -29,6 +30,7 @@ public class BoardServiceImpl implements BoardService{
 				rHm.put("content", rs.getString("content"));
 				rHm.put("reg_date", rs.getString("reg_date"));
 				rHm.put("writer", rs.getString("writer"));
+				rHm.put("name", rs.getString("name"));
 				boardList.add(rHm);
 			}			
 		}catch(Exception e) {
@@ -38,19 +40,33 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int insertBoard() {
+	public int insertBoard(Map<String, String> hm) {
+		String sql = "insert into board(title, content, reg_Date,writer)";
+		sql +=" values(?,?,now(),?)";
+		Connection con;
+		try {
+			DBCon db = new DBCon();
+			con = db.getCon();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, hm.get("title"));
+			ps.setString(2, hm.get("content"));
+			ps.setString(3, hm.get("writer"));
+			int rCnt = ps.executeUpdate();
+			return rCnt;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteBoard(Map<String, String> hm) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteBoard() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateBoard() {
+	public int updateBoard(Map<String, String> hm) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

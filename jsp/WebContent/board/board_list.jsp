@@ -5,7 +5,6 @@
 </head>
 <script>
 function callback(result){
-	alert(result.list);
 	var boardList = result.list;
 	var str = "<table border='1'>";
 	str += "<tr>";
@@ -14,6 +13,8 @@ function callback(result){
 	str += "<td>내용</td>";
 	str += "<td>게시일자</td>";
 	str += "<td>게시자</td>";
+	str += "<td>수정</td>";
+	str += "<td>삭제</td>";
 	str += "</tr>";
 	for(var i=0, max=boardList.length;i<max;i++){
 		var board = boardList[i];
@@ -22,7 +23,9 @@ function callback(result){
 		str += "<td>" + board.title + "</td>";
 		str += "<td>" + board.content + "</td>";
 		str += "<td>" + board.reg_date + "</td>";
-		str += "<td>" + board.writer + "</td>";
+		str += "<td>" + board.name + "</td>";
+		str += "<td><input type='button' value='수정'></td>";
+		str += "<td><input type='button' value='삭제'></td>";
 		str += "</tr>";
 	}
 	str += "</table>";
@@ -34,9 +37,13 @@ $(document).ready(function(){
 	var au = new AjaxUtil(param,"/list.board");
 	au.changeCallBack(callback);
 	au.send();
+	$("#btnWrite").click(function(){
+		location.href="/board/board_write.jsp";
+	})
 })
 </script>
 <body>
 <div id="result_div"></div>
+<input type="button" id="btnWrite" value="게시물작성">
 </body>
 </html>

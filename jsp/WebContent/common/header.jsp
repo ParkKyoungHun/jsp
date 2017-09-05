@@ -7,9 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 String rootPaht = request.getContextPath();
+Map<String, String> user = null;
 if(session.getAttribute("user")==null){
 	RequestDispatcher dis = request.getRequestDispatcher("/login.jsp");
 	dis.forward(request, response);
+}else{
+	user = (Map<String, String>)session.getAttribute("user");
 }
 %>
 <script src="<%=rootPaht%>/js/jquery-3.2.1.min.js"></script>

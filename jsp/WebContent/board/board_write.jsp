@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/common/header.jsp" %>
 <title>게시판 작성</title>
 </head>
+<script>
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		var param = {};
+		param["title"] = $("#title").val();
+		param["content"] = $("#content").val();
+		param = "?command=write&param=" + JSON.stringify(param);
+		param = encodeURI(param);
+		var au = new AjaxUtil(param,"write.board");
+		au.send();
+	})
+})
+
+</script>
 <body>
 <form action="write.board" method="post">
 	<table>
@@ -19,10 +30,10 @@
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="writer" id="writer"></td>
+			<td><input type="text" name="writer" id="writer" readonly value="<%=user.get("name")%>"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="게시글 올리기"></td>
+			<td colspan="2"><input type="button" id="btnWrite" value="게시글 올리기"></td>
 		</tr>
 	</table>
 	<input type="hidden" name="command" value="write">

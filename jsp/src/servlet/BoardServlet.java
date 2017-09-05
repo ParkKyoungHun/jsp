@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,7 @@ public class BoardServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String command = request.getParameter("command");
+		System.out.println(command);
 		if(command.equals("list")) {
 			List<Map<String, String>> boardList = bs.selectBoardList();
 			Map<String, Object> rHm = new HashMap<String, Object>();
@@ -44,6 +46,16 @@ public class BoardServlet extends HttpServlet {
 			String result = g.toJson(rHm);
 			System.out.println(result);
 			doProcess(response, result);
+		}else if(command.equals("write")) {
+			String param = request.getParameter("param");
+			Map<String, String> hm = g.fromJson(param, HashMap.class);
+			System.out.println(hm);
+			System.out.println(hm.get("title"));
+			System.out.println(hm.get("content"));
+			HttpSession session = request.getSession();
+			Map<String, String> user = (Map<String, String>)session.getAttribute("user");
+			hm.put("writer", user.get("user_no"));
+			int row = bs.insertBoard(hm);
 		}
 	}
 	

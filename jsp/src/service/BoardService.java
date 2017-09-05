@@ -9,9 +9,9 @@ public interface BoardService {
 	
 	Map<String, String> selectBoard();
 	
-	int insertBoard();
+	int insertBoard(Map<String, String> hm);
 	
-	int deleteBoard();
+	int deleteBoard(Map<String, String> hm);
 	
-	int updateBoard();
+	int updateBoard(Map<String, String> hm);
 }
