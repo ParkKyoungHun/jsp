@@ -7,7 +7,7 @@ public interface BoardService {
 
 	List<Map<String, String>> selectBoardList();
 	
-	Map<String, String> selectBoard();
+	Map<String, String> selectBoard(Map<String, String> hm);
 	
 	int insertBoard(Map<String, String> hm);
 	

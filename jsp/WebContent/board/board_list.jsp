@@ -24,13 +24,19 @@ function callback(result){
 		str += "<td>" + board.content + "</td>";
 		str += "<td>" + board.reg_date + "</td>";
 		str += "<td>" + board.name + "</td>";
-		str += "<td><input type='button' value='수정'></td>";
-		str += "<td><input type='button' value='삭제'></td>";
+		str += "<td><input type='button' value='수정' data-num='" + board.b_num +"'></td>";
+		str += "<td><input type='button' value='삭제' data-num='" + board.b_num +"'></td>";
 		str += "</tr>";
 	}
 	str += "</table>";
 	$("#result_div").html(str);
-		
+	
+	$("input[type='button']").click(function(){
+		var b_num = this.getAttribute("data-num");
+		if(this.value=="수정"){
+			location.href="/board/board_modify.jsp?b_num=" + b_num;
+		}
+	})
 }
 $(document).ready(function(){
 	var param = "?command=list";

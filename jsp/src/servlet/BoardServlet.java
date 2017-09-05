@@ -56,6 +56,22 @@ public class BoardServlet extends HttpServlet {
 			Map<String, String> user = (Map<String, String>)session.getAttribute("user");
 			hm.put("writer", user.get("user_no"));
 			int row = bs.insertBoard(hm);
+			Map<String, String> rHm = new HashMap<String, String>();
+			rHm.put("msg", "저장에 실패했습니다.");
+			rHm.put("url", "/board/board_write.jsp");
+			
+			if(row==1) {
+				rHm.put("msg", "저장에 성공했습니다..");
+				rHm.put("url", "/board/board_list.jsp");
+			}
+			String result = g.toJson(rHm);
+			doProcess(response, result);
+		}else if(command.equals("view")) {
+			String param = request.getParameter("param");
+			Map<String, String> hm = g.fromJson(param, HashMap.class);
+			Map<String, String> rHm = bs.selectBoard(hm);
+			String result = g.toJson(rHm);
+			doProcess(response, result);
 		}
 	}
 	

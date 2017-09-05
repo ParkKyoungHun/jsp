@@ -5,6 +5,7 @@
 </head>
 <script>
 $(document).ready(function(){
+	
 	$("#btnWrite").click(function(){
 		var param = {};
 		param["title"] = $("#title").val();
