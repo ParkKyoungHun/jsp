@@ -18,16 +18,32 @@ $(document).ready(function(){
 	var au = new AjaxUtil(param,"write.board");
 	au.changeCallBack(callback);
 	au.send();
-	$("#btnMOdify").click(function(){
+	$("#btnModify").click(function(){
 		var param = {};
 		param["title"] = $("#title").val();
 		param["content"] = $("#content").val();
 		param["writer"] = $("#writer").val();
+		param["b_num"] = "<%=request.getParameter("b_num")%>";
 		param = "?command=modify&param=" + JSON.stringify(param);
-		param = encodeURI(param);
-		var au = new AjaxUtil(param,"write.board");
-		au.send();
-	})
+		$.ajax({ 
+	        type     : "POST"
+	    	    ,   url      : "/write.board"
+	    	    ,   dataType : "json" 
+	    	    ,   beforeSend: function(xhr) {
+	    	        xhr.setRequestHeader("Accept", "application/json");
+	    	        xhr.setRequestHeader("Content-Type", "application/json");
+	    	    }
+	    	    ,   data     : param
+	    	    ,   success : function(result){
+	    	    	alert(result.msg);
+	    	    }
+	    	    ,   error : function(xhr, status, e) {
+	    		    	alert("에러 : "+e);
+	    		},
+	    		complete : function(e) {
+	    		}
+		    });
+	});
 })
 
 </script>
@@ -47,7 +63,7 @@ $(document).ready(function(){
 			<td><input type="text" name="writerName" id="writerName" readonly ></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="button" id="btnMOdify" value="게시글 수정"></td>
+			<td colspan="2"><input type="button" id="btnModify" value="게시글 수정"></td>
 		</tr>
 	</table>
 	<input type="hidden" name="command" id="command" value="write">

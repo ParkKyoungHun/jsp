@@ -72,6 +72,19 @@ public class BoardServlet extends HttpServlet {
 			Map<String, String> rHm = bs.selectBoard(hm);
 			String result = g.toJson(rHm);
 			doProcess(response, result);
+		}else if(command.equals("modify")) {
+			String param = request.getParameter("param");
+			Map<String, String> hm = g.fromJson(param, HashMap.class);
+			int rCnt = bs.updateBoard(hm);
+			Map<String, String> rHm = new HashMap<String, String>();
+			rHm.put("msg", "게시물 수정이 실패했습니다.");
+			rHm.put("url", "");
+			if(rCnt ==1) {
+				rHm.put("msg", "게시물 수정이 성공했습니다.");
+				rHm.put("url", "/board/board_list.jsp");
+			}
+			String result = g.toJson(rHm);
+			doProcess(response, result);
 		}
 	}
 	
