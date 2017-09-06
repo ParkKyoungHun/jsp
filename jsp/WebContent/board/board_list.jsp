@@ -35,6 +35,30 @@ function callback(result){
 		var b_num = this.getAttribute("data-num");
 		if(this.value=="수정"){
 			location.href="/board/board_modify.jsp?b_num=" + b_num;
+		}else if(this.value="삭제"){
+			var param = {};
+			param["b_num"] = b_num;
+			param["command"] = "delete"
+			param = JSON.stringify(param);
+			$.ajax({ 
+		        type     : "POST"
+		    	    ,   url      : "/write.board"
+		    	    ,   dataType : "json" 
+		    	    ,   beforeSend: function(xhr) {
+		    	        xhr.setRequestHeader("Accept", "application/json");
+		    	        xhr.setRequestHeader("Content-Type", "application/json");
+		    	    }
+		    	    ,   data     : param
+		    	    ,   success : function(result){
+		    	    	alert(result.msg);
+		    	    	location.href=result.url;
+		    	    }
+		    	    ,   error : function(xhr, status, e) {
+		    		    	alert("에러 : "+e);
+		    		},
+		    		complete : function(e) {
+		    		}
+			    });
 		}
 	})
 }

@@ -77,17 +77,14 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int deleteBoard(Map<String, String> hm) {
-		String sql = "insert into board(title, content, writer)";
-		sql +=" values(?,?,?)";
+		String sql = "delete from board where b_num=?";
 		Connection con = null;
 		DBCon db = null;
 		try {
 			db = new DBCon();
 			con = db.getCon();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, hm.get("title"));
-			ps.setString(2, hm.get("content"));
-			ps.setString(3, hm.get("writer"));
+			ps.setString(1, hm.get("b_num"));
 			int rCnt = ps.executeUpdate();
 			if(rCnt==1) {
 				con.commit();

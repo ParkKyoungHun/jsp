@@ -24,7 +24,8 @@ $(document).ready(function(){
 		param["content"] = $("#content").val();
 		param["writer"] = $("#writer").val();
 		param["b_num"] = "<%=request.getParameter("b_num")%>";
-		param = "?command=modify&param=" + JSON.stringify(param);
+		param["command"] = "modify"
+		param = JSON.stringify(param);
 		$.ajax({ 
 	        type     : "POST"
 	    	    ,   url      : "/write.board"
@@ -36,6 +37,7 @@ $(document).ready(function(){
 	    	    ,   data     : param
 	    	    ,   success : function(result){
 	    	    	alert(result.msg);
+	    	    	location.href=result.url;
 	    	    }
 	    	    ,   error : function(xhr, status, e) {
 	    		    	alert("에러 : "+e);
