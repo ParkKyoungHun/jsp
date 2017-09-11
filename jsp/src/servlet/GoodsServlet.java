@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,13 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import service.BoardService;
-import service.BoardServiceImpl;
+import dto.GoodsInfo;
+import dto.VendorInfo;
+import service.GoodsService;
+import service.GoodsServiceImpl;
 
 public class GoodsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private BoardService bs = new BoardServiceImpl();
+	private GoodsService gs = new GoodsServiceImpl();
 	private Gson g = new Gson();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,11 +33,10 @@ public class GoodsServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String command = request.getParameter("command");
 		if(command.equals("list")) {
-			List<String> list = new ArrayList<String>();
-			list.add("test1");
-			list.add("test2");
-			list.add("test3");
-			request.setAttribute("test", list);
+			List<GoodsInfo> list = gs.selectGoodsList(null);
+			List<VendorInfo> vList = gs.selectVendorList(null);
+			request.setAttribute("goodsList", list);
+			request.setAttribute("vendorList", vList);
 			String url = "/goods/goods_list.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
