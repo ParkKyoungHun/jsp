@@ -70,6 +70,13 @@ public class GoodsServlet extends HttpServlet {
 			List<VendorInfo> vList = gs.selectVendorList(null);
 			String result = g.toJson(vList);
 			doProcess(response, result);
+		}else if("insert".equals(command)) {
+			String param = request.getParameter("param");
+			Map<String, String> hm = g.fromJson(param, HashMap.class);
+			String giName = hm.get("giName");
+			String giDesc = hm.get("giDesc");
+			String viNum = hm.get("viNum");
+			System.out.println(hm);
 		}
 	}
 	
