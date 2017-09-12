@@ -50,7 +50,16 @@ public class GoodsServlet extends HttpServlet {
 			command = hm.get("command");
 		} 
 		if(command.equals("list")) {
-			List<GoodsInfo> list = gs.selectGoodsList(null);
+			String viNum = request.getParameter("vendor");
+			String giName = request.getParameter("giName");
+			GoodsInfo gi = new GoodsInfo();
+			if(viNum!=null) {
+				gi.setViNum(Integer.parseInt(viNum));
+			}
+			if(giName!=null) {
+				gi.setGiName(giName);
+			}
+			List<GoodsInfo> list = gs.selectGoodsList(gi);
 			List<VendorInfo> vList = gs.selectVendorList(null);
 			request.setAttribute("goodsList", list);
 			request.setAttribute("vendorList", vList);

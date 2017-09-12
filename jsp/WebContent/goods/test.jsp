@@ -5,7 +5,12 @@
 </head>
 <script>
 function callback(result){
-	alert(result);
+	var str ="";
+	for(var i=0, max=result.length;i<max;i++){
+		var re = result[i];
+		str += "<option value='" + re.viNum + "'>" + re.viName + "</option>";
+	}
+	$("#vendor").html(str);
 }
 $(document).ready(function(){
 	var param = {};
@@ -19,6 +24,8 @@ $(document).ready(function(){
 </script>
 <body>
 <form action="test.goods" method="post">
+<select name="vendor" id="vendor">
+</select>
 <input type="hidden" name="command" value="list">
 <input type="submit" value="리퀘스트디스패쳐 테스트">
 </form>
