@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="/common/header.jsp" %>
 <title>유저리스트</title>
-<script src="/js/jquery-3.2.1.min.js"></script>
 <script>
 	var AjaxUtil = function(params) {
 		this.params = params;
@@ -22,17 +18,33 @@
 		var method = "post";
 		var url = "test.user";
 		var aSync = true;
+		this.xhr.callback = null;
 		this.xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				if (this.status == 200) {
 					var result = decodeURIComponent(this.responseText);
-					$("#result_div").html(result);
+					result = JSON.parse(result);
+					$('#table').bootstrapTable('destroy');
+					$('#table').bootstrapTable({
+						data : result
+					}); 
+					/* var str = "";
+					for(var i=0, max=result.length;i<max;i++){
+						var map = result[i];
+						str += "<tr>";
+						str += "<td>" + map.user_no +"</td>";
+						str += "<td>" + map.id +"</td>";
+						str += "<td>" + map.name +"</td>";
+						str += "<td>" + map.hobby +"</td>";
+						str += "</tr>";
+					}
+					$("#result_tbody").html(str); */
 					setEvent();
 				}
 			}
 		}
 		this.changeCallBack = function(func) {
-			this.xhr.onreadystatechange = func;
+			this.xhr.callback = func;
 		}
 		this.xhr.open(method, url + params, aSync);
 		this.send = function() {
@@ -45,7 +57,7 @@
 			var url = this.getAttribute("data-url");
 			if(url){
 				if(url.split(".")[1]=="user"){
-					var param = "?command=list&name="+$("#name").val();
+					var param = "?command=list2&name="+$("#name").val();
 					var au = new AjaxUtil(param);
 					au.send();
 				}
@@ -63,7 +75,7 @@
 	}
 
 	$(document).ready(function() {
-		var param = "?command=list";
+		var param = "?command=list2";
 		var au = new AjaxUtil(param);
 		au.send();
 	})
@@ -76,9 +88,23 @@
 </script>
 </head>
 <body>
-	<input type="button" id="btnHome" value="홈으로">
-	<div id="result_div"></div>
+
+    <div class="container">
+	<table id="table" data-height="460"
+		class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th data-field="user_no" class="text-center">번호</th>
+				<th data-field="id"  class="text-center">아이디</th>
+				<th data-field="name"  class="text-center">이름</th>
+				<th data-field="hobby"  class="text-center">취미</th>
+			</tr>
+		</thead>
+		<tbody id="result_tbody">
+		</tbody>
+	</table>
 	이름 : <input type="text" name="name" id="name">
 	<input type="button" value="검색" data-url="search.user">
+	</div>
 </body>
 </html>

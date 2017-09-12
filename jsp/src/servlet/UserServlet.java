@@ -136,8 +136,8 @@ public class UserServlet extends HttpServlet {
 			for(Map<String, String> m : userList) {
 				result += "<tr>";
 				result += "<td>" + m.get("user_no")+"</td>";
-				result += "<td>" + m.get("id")+"</td>";
 				result += "<td>" + m.get("name")+"</td>";
+				result += "<td>" + m.get("id")+"</td>";
 				result += "<td>" + m.get("hobby")+"</td>";
 				result += "<td><input type='button' value='수정' data-num='" + m.get("user_no") +"'></td>";
 				result += "<td><input type='button' value='삭제' data-num='" + m.get("user_no") +"'></td>";
@@ -150,6 +150,13 @@ public class UserServlet extends HttpServlet {
 			Map<String, String> hm = us.selectUser(userNo);
 			Gson g = new Gson();
 			String result = g.toJson(hm);
+			doProcess(response, result);
+		}else if(command.equals("list2")) {
+			Map<String, String> hm = new HashMap<String, String>();
+			hm.put("name", request.getParameter("name"));
+			List<Map<String, String>> userList = us.getUserList(hm);
+			Gson g = new Gson();
+			String result = g.toJson(userList);
 			doProcess(response, result);
 		}
 	}

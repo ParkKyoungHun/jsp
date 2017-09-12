@@ -16,15 +16,13 @@ if(session.getAttribute("user")==null){
 }
 %>
 <script src="<%=rootPath%>/js/jquery-3.2.1.min.js"></script>
-<script src="<%=rootPath%>/ui/common.js?"></script>
-<script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap.min.js?"></script>
-<script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap-table.js?"></script>
-<script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap-table.js?"></script>
+<script src="<%=rootPath%>/ui/common.js"></script>
+<script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap.min.js"></script>
+<script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap-table.js"></script>
 <link rel="stylesheet" href="<%=rootPath%>/ui/btsp3.7.7/css/bootstrap-theme.min.css?"/>
 <link rel="stylesheet" href="<%=rootPath%>/ui/btsp3.7.7/css/bootstrap.min.css?"/>
 <link rel="stylesheet" href="<%=rootPath%>/ui/btsp3.7.7/css/bootstrap-table.css?"/>
 <link rel="stylesheet" href="<%=rootPath%>/ui/common.css?"/>
-<script>
 <script>
 var AjaxUtil = function(params,p_url) {
 	this.params = params;

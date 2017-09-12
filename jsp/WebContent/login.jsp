@@ -31,7 +31,7 @@ if(user==null){
 <link rel="stylesheet" href="/ui/signin.css" />
 <body>
 	<div class="container">
-		<form class="form-signin" action="/user/login_ok.jsp">
+		<form class="form-signin" action="/login.user" method="post">
 			<h2 class="form-signin-heading">Please login</h2>
 			<label for="inputEmail" class="sr-only">ID</label> <input type="text"
 				id="id" name="id" class="form-control" placeholder="ID" required
@@ -43,8 +43,9 @@ if(user==null){
 					Remember me
 				</label>
 			</div>
-			<button id="btn2" class="btn btn-lg btn-primary btn-block"
-				type="button">Login</button>
+			<input type="hidden" name="command" value="login"/>
+			<input  class="btn btn-lg btn-primary btn-block"
+				type="submit" value="Login">
 		</form>
 
 	</div>
@@ -54,17 +55,14 @@ if(user==null){
 		var id = $("#id").val();
 		var pwd = $("#pwd").val();
 		var param = {};
-		param["userId"] = id;
-		param["userPwd"] = pwd;
+		param["id"] = id;
+		param["pwd"] = pwd;
+		param["command"] = "login";
 		param = JSON.stringify(param);
 		var a = { 
 		        type     : "POST"
-		    	    ,   url      : "/user/login_ok.jsp"
+		    	    ,   url      : "/login.user"
 		    	    ,   dataType : "json" 
-		    	    ,   beforeSend: function(xhr) {
-		    	        xhr.setRequestHeader("Accept", "application/json");
-		    	        xhr.setRequestHeader("Content-Type", "application/json");
-		    	    }
 		    	    ,   data     : param
 		    	    ,   success : function(result){
 		    	    	alert(result.msg);
