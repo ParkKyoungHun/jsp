@@ -16,10 +16,6 @@ if(session.getAttribute("user")==null){
 }
 %>
 <script src="<%=rootPath%>/js/jquery-3.2.1.min.js"></script>
-<script src="<%=rootPath%>/js/jquery-3.2.1.js?"></script>
-<script src="<%=rootPath%>/js/jquery-ui-1.9.2.custom.js?"></script>
-<script src="<%=rootPath%>/js/jquery.fileupload.js?"></script>
-<script src="<%=rootPath%>/js/jquery.iframe-transport.js?"></script>
 <script src="<%=rootPath%>/ui/common.js?"></script>
 <script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap.min.js?"></script>
 <script src="<%=rootPath%>/ui/btsp3.7.7/js/bootstrap-table.js?"></script>
