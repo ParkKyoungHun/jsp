@@ -91,6 +91,32 @@ public class GoodsServlet extends HttpServlet {
 			GoodsInfo gi = g.fromJson(param, GoodsInfo.class);
 			System.out.println(gi);
 			gi = gs.selectGoods(gi);
+			String result = g.toJson(gi);
+			doProcess(response, result);
+		}else if("update".equals(command)) {
+			String param = request.getParameter("param");
+			GoodsInfo gi = g.fromJson(param, GoodsInfo.class);
+			int rCnt = gs.updateGoods(gi);
+			Map<String, String> rHm = new HashMap<String, String>(); 
+			rHm.put("msg","상품수정에 실패하셨습니다.");
+			if(rCnt==1) {
+				rHm.put("insert", "ok");
+				rHm.put("msg","상품수정에 성공하셨습니다.");
+			}
+			String result = g.toJson(rHm);
+			doProcess(response, result);
+		}else if("delete".equals(command)) {
+			String param = request.getParameter("param");
+			GoodsInfo gi = g.fromJson(param, GoodsInfo.class);
+			int rCnt = gs.deleteGoods(gi);
+			Map<String, String> rHm = new HashMap<String, String>(); 
+			rHm.put("msg","상품삭제에 실패하셨습니다.");
+			if(rCnt==1) {
+				rHm.put("insert", "ok");
+				rHm.put("msg","상품삭제에 성공하셨습니다.");
+			}
+			String result = g.toJson(rHm);
+			doProcess(response, result);
 		}
 	}
 	
