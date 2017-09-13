@@ -111,8 +111,6 @@ $(function () {
 	});
 	$("[data-ginum]").click(function(){
 		var giNum = this.getAttribute("data-ginum");
-		alert(giNum);
-		return;
 		var param = {};
 		param["giNum"] = giNum;
 		param = "?command=view&param=" + JSON.stringify(param);

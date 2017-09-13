@@ -71,7 +71,45 @@ public class GoodsServiceImpl implements GoodsService{
 
 	@Override
 	public GoodsInfo selectGoods(GoodsInfo gi) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		DBCon db = null;
+		try {
+			db = new DBCon();
+			con = db.getCon();
+			String sql = "select gi.ginum, gi.giname, gi.gidesc, " + 
+					" gi.vinum, gi.gicredat," + 
+					" gi.gimofdat, gi.gicreusr,u.name, gi.gimofusr," + 
+					" (select u2.name from user as u2" + 
+					" where gi.gimofusr = u2.user_no)" + 
+					" as name2" + 
+					" from goods_info as gi," + 
+					" user as u" + 
+					" where gi.gicreusr = u.user_no"
+					+ " and gi.ginum=? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, gi.getGiNum());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				GoodsInfo rGi = new GoodsInfo();
+				rGi.setGiNum(rs.getInt("giNum"));
+				rGi.setGiName(rs.getString("giName"));
+				rGi.setGiDesc(rs.getString("gidesc"));
+				rGi.setViNum(rs.getInt("vinum"));
+				rGi.setGiCredat(rs.getString("gicredat"));
+				rGi.setGiMofdat(rs.getString("gimofdat"));
+				rGi.setGiCreusr(rs.getInt("gicreusr"));
+				rGi.setGiMofusr(rs.getInt("gimofusr"));
+				rGi.setName(rs.getString("name"));
+				rGi.setName2(rs.getString("name2"));
+				return rGi;
+			}			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(db!=null) {
+				db.closeCon();
+			}
+		}
 		return null;
 	}
 

@@ -73,5 +73,10 @@ public class GoodsInfo {
 	public void setGiMofusr(int giMofusr) {
 		this.giMofusr = giMofusr;
 	}
-	
+	@Override
+	public String toString() {
+		return "GoodsInfo [giNum=" + giNum + ", giName=" + giName + ", giDesc=" + giDesc + ", viNum=" + viNum
+				+ ", giCredat=" + giCredat + ", giMofdat=" + giMofdat + ", giCreusr=" + giCreusr + ", giMofusr="
+				+ giMofusr + ", name=" + name + ", name2=" + name2 + "]";
+	}
 }
