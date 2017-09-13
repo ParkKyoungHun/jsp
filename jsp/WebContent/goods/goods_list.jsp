@@ -26,7 +26,7 @@
 		</tr>
 		</thead>
 		<c:forEach items="${goodsList}" var="goods">
-			<tr>
+			<tr data-ginum="${goods.giNum}">
 				<td><c:out value="${goods.giNum}" /></td>
 				<td><c:out value="${goods.giName}" /></td>
 				<td><c:out value="${goods.giDesc}" /></td>
@@ -106,8 +106,32 @@ $(function () {
 		param = "?command=insert&param=" + JSON.stringify(param);
 		param = encodeURI(param);
 		var au = new AjaxUtil(param, "insert.goods");
+		au.changeCallBack(callback)
 		au.send();
 	});
+	$("[data-ginum]").click(function(){
+		var giNum = this.getAttribute("data-ginum");
+		alert(giNum);
+		return;
+		var param = {};
+		param["giNum"] = giNum;
+		param = "?command=view&param=" + JSON.stringify(param);
+		param = encodeURI(param);
+		var au = new AjaxUtil(param, "view.goods");
+		au.changeCallBack(callbackView)
+		au.send();
+	})
 });
+function callbackView(result){
+	alert(result.giName);
+}
+function callback(result){
+	alert(result.msg)
+	if(result.insert){
+		if(result.insert=="ok"){
+			location.reload();
+		}
+	}
+}
 </script>
 </html>

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import dto.GoodsInfo;
 import dto.VendorInfo;
@@ -15,7 +16,7 @@ public interface GoodsService {
 	
 	int deleteGoods(GoodsInfo gi);
 	
-	int insertGoods(GoodsInfo gi);
+	int insertGoods(Map<String, String> gi);
 	
 	int updateGoods(GoodsInfo gi);
 }

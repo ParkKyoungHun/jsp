@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -73,10 +74,18 @@ public class GoodsServlet extends HttpServlet {
 		}else if("insert".equals(command)) {
 			String param = request.getParameter("param");
 			Map<String, String> hm = g.fromJson(param, HashMap.class);
-			String giName = hm.get("giName");
-			String giDesc = hm.get("giDesc");
-			String viNum = hm.get("viNum");
-			System.out.println(hm);
+			HttpSession hs = request.getSession();
+			Map<String, String> user = (Map<String, String>)hs.getAttribute("user");
+			hm.put("userNo", user.get("user_no"));
+			int rCnt = gs.insertGoods(hm);
+			Map<String, String> rHm = new HashMap<String, String>(); 
+			rHm.put("msg","상품입력에 실패하셨습니다.");
+			if(rCnt==1) {
+				rHm.put("insert", "ok");
+				rHm.put("msg","상품입력에 성공하셨습니다.");
+			}
+			String result = g.toJson(rHm);
+			doProcess(response, result);
 		}
 	}
 	

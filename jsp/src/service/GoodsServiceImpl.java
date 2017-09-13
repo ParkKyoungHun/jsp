@@ -3,6 +3,7 @@ package service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +82,38 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	@Override
-	public int insertGoods(GoodsInfo gi) {
-		// TODO Auto-generated method stub
+	public int insertGoods(Map<String,String> map) {
+		Connection con = null;
+		DBCon db = null;
+		try {
+			db = new DBCon();
+			con = db.getCon();
+			String sql = "insert into goods_info(giname, gidesc, vinum,";
+			sql += " gicredat, gimofdat, gicreusr, gimofusr)";
+			sql += " values(?,?,?,now(),now(),?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, map.get("giName"));
+			ps.setString(2, map.get("giDesc"));
+			ps.setString(3, map.get("viNum"));
+			ps.setString(4, map.get("userNo"));
+			ps.setString(5, map.get("userNo"));
+			int rCnt = ps.executeUpdate();
+			con.commit();
+			return rCnt;
+		}catch(Exception e) {
+			try {
+				if(con!=null) {
+					con.rollback();
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			if(db!=null) {
+				db.closeCon();
+			}
+		}
 		return 0;
 	}
 
